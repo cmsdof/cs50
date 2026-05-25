@@ -5,14 +5,24 @@
 #include <math.h>
 
 
-int main(void)
+int main(int argc, string argv[])
 {
     // Make sure program was run with just one command-line argument
-    // if (size of argv[] > 2) {return 0;}
+    if (argc > 2 || argc == 1)
+    {
+        printf("Usage: ./caesar key\n");
+        return 0;
+    }
 
     // Make sure every character in argv[1] is a digit
-    // for (int i = 0; i < strlen(argv[1]); i++)
-    // {if (argv[1][i] is not a int) {printf("%s", usage);return 0;}}
+    for (int i = 0; i < strlen(argv[1]); i++)
+    {
+        if (isdigit(argv[1][i]) == 0)
+        {
+            printf("Usage: ./caesar key\n");
+            return 0;
+        }
+    }
 
     // Convert argv[1] from a `string` to an `int`
 
