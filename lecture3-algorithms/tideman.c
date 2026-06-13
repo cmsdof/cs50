@@ -1,5 +1,6 @@
 #include <cs50.h>
 #include <stdio.h>
+#include <string.h>
 
 // Max number of candidates
 #define MAX 9
@@ -99,13 +100,34 @@ int main(int argc, string argv[])
 bool vote(int rank, string name, int ranks[])
 {
     // TODO
-    return false;
+    bool valid;
+    // Validating Vote
+    for (int i = 0; i < candidate_count; i++)
+    {
+        valid = false;
+
+        if (strcmp(name, candidates[i]) == 0)
+        {
+            valid = true;
+            ranks[rank] = i;
+            break;
+        }
+    }
+
+    return valid;
 }
 
 // Update preferences given one voter's ranks
 void record_preferences(int ranks[])
 {
     // TODO
+    for (int i = 0; i < candidate_count; i++)
+    {
+        for (int j = i + 1; j < candidate_count; j++)
+        {
+            preferences[ranks[i]][ranks[j]] += 1;
+        }
+    }
     return;
 }
 
@@ -113,6 +135,22 @@ void record_preferences(int ranks[])
 void add_pairs(void)
 {
     // TODO
+    pair_count = 0;
+    for (int i = 0; i < candidate_count; i++)
+    {
+        for (int j = 0; j < candidate_count; j++)
+        {
+
+            if (preferences[i][j] > preferences[j][i])
+            {
+                pairs[pair_count].winner = i;
+                pairs[pair_count].loser = j;
+
+                pair_count += 1;
+            }
+        }
+    }
+
     return;
 }
 
@@ -120,6 +158,8 @@ void add_pairs(void)
 void sort_pairs(void)
 {
     // TODO
+    // IF preference[pair[i].winner][pair[i].loser] < preference[pair[i + 1].winner][pair[i + 1].loser] -> swap
+
     return;
 }
 
