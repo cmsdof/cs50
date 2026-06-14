@@ -158,8 +158,27 @@ void add_pairs(void)
 void sort_pairs(void)
 {
     // TODO
-    // IF preference[pair[i].winner][pair[i].loser] < preference[pair[i + 1].winner][pair[i + 1].loser] -> swap
+    pair swap[1];
+    for (int i = 0; i < sizeof(pairs) - 1; i++)
+    {
+        int max = i;
 
+        for (int j = i + 1; j < sizeof(pairs); j++)
+        {
+            if (preferences[pairs[i].winner][pairs[i].loser] < preferences[pairs[j].winner][pairs[j].loser])
+            {
+                max = j;
+            }
+        }
+
+        if (max != i)
+        {
+            swap[0] = pairs[i];
+            pairs[i] = pairs[max];
+            pairs[max] = swap[0];
+        }
+
+    }
     return;
 }
 
